@@ -1394,12 +1394,17 @@ body.dashboard-layout { display: flex; flex-direction: row; min-height: 100vh; }
 .tag-pill { background: #FAF0EB; color: var(--terracotta); padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; }
 
 /* 14. Part C extra styles (pages 11, 12, 15) */
+
 .proposal-card-top { border-color: var(--success-green); }
+
 .proposal-header { display: flex; justify-content: space-between; align-items: flex-start; }
 .proposal-body { color: var(--espresso); line-height: 1.6; margin-top: 8px; }
+
 .proposal-actions { display: flex; justify-content: flex-end; gap: 12px; border-top: 1px solid var(--border-subtle); padding-top: 16px; margin-top: 8px; }
 .price-highlight { color: var(--success-green); font-size: 28px; }
+
 .price-regular { font-size: 28px; }
+
 
 /* 15. Part D extra styles (pages 16 to 19) */
 body.admin-layout { display: flex; flex-direction: row; min-height: 100vh; }
