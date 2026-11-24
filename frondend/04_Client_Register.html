@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  Page: 04_Client_Register.html
+  Part: Part A (Accounts and start)
+  Purpose: Registration page for enterprise and startup clients looking to hire AI freelancers.
+  Database tables: USERS, CLIENTS
+-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zelance - Client Sign Up</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/zelance.css">
+</head>
+<body class="center-layout">
+
+  <!-- Registration card container -->
+  <main class="reg-wrapper">
+    <div class="header-row">
+      <h1 class="reg-title">Sign Up as Client</h1>
+      <span class="badge-pill">Client</span>
+    </div>
+    <p class="subtext">Connect with verified AI specialists and commission production-ready models.</p>
+
+    <!-- Client registration form -->
+    <!-- Connecting database here: this form inserts a user record into USERS (role = 'CLIENT'), and a corresponding record into CLIENTS (client_id, company_name, industry, total_spent = 0). -->
+    <form method="post" action="#">
+      <input type="hidden" name="role" value="CLIENT">
+
+      <div class="form-group">
+        <label for="company_name" class="field-label">Company / Organization Name</label>
+        <div class="input-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+          </svg>
+          <input type="text" id="company_name" name="company_name" placeholder="e.g. Lanka Legal Tech" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="full_name" class="field-label">Contact Person</label>
+        <div class="input-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <input type="text" id="full_name" name="full_name" placeholder="e.g. Nimal Perera" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="industry" class="field-label">Industry Vertical</label>
+        <div class="input-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+          <input type="text" id="industry" name="industry" placeholder="e.g. Legal Technology" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="field-label">Work Email Address</label>
+        <div class="input-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          <input type="email" id="email" name="email" placeholder="e.g. nimal@lankalegal.lk" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password_hash" class="field-label">Password</label>
+        <div class="input-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <input type="password" id="password_hash" name="password_hash" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit btn-block">Create Client Profile &rarr;</button>
+
+      <div class="divider-row">
+        <span>OR</span>
+      </div>
+
+      <p class="auth-footer-prompt">
+        Are you an engineer? <a href="03_Freelancer_Register.html" class="register-link">Sign up as Freelancer</a>
+        &bull;
+        <a href="02_Login_Role.html" class="register-link">Log In</a>
+      </p>
+    </form>
+  </main>
+
+</body>
+</html>
