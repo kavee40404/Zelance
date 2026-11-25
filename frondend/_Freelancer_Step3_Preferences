@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  Page: 08_Freelancer_Step3_Preferences.html
+  Part: Part B (Freelancer side)
+  Purpose: Step 3 of freelancer profile setup covering billing rate, project minimums, and weekly availability.
+  Database tables: FREELANCERS
+-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zelance - Freelancer Onboarding Step 3 (Work Preferences)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/zelance.css">
+</head>
+<body class="center-layout">
+
+  <main class="onboard-box">
+    <div class="stepper">Step 3 of 3 &bull; Rates &amp; Engagement</div>
+    <h1 class="title">Work Preferences &amp; Pricing</h1>
+    <p class="subtext">Set your minimum commitment and hourly rate.</p>
+
+    <!-- Connecting database here: this form saves engagement_type, availability, hourly_rate, and minimum_budget into the FREELANCERS table for this freelancer_id. -->
+    <form method="post" action="09_Skills_And_Services.html">
+      <div class="form-group">
+        <label class="label">Engagement Type</label>
+        <div class="input-box">
+          <select name="engagement_type">
+            <option selected>Fixed Price &amp; Milestone Contracts</option>
+            <option>Hourly Consulting</option>
+            <option>Retainer / Dedicated Engineer</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="label">Weekly Availability</label>
+        <div class="input-box">
+          <select name="availability">
+            <option selected>Available (30+ hours / week)</option>
+            <option>Part-time (15-20 hours / week)</option>
+            <option>Consulting only (&lt;10 hours)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="label">Standard Hourly Rate ($ USD)</label>
+        <div class="input-box">
+          <input type="number" name="hourly_rate" value="50" min="10" max="500" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="label">Minimum Project Budget Threshold</label>
+        <div class="input-box">
+          <input type="number" name="minimum_budget" value="500" min="50" max="50000">
+        </div>
+      </div>
+
+      <button type="submit" class="btn-next mt-12">
+        Next: Select Skills &amp; Services <span>&rarr;</span>
+      </button>
+    </form>
+  </main>
+
+</body>
+</html>
