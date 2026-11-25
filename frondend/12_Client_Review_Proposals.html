@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  Page: 12_Client_Review_Proposals.html
+  Part: Part C (Client side)
+  Purpose: Interface for clients to review received proposals and accept bids for funding.
+  Database tables: PROPOSALS, PROJECTS
+-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zelance - Review Incoming Proposals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/zelance.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+    <a href="01_Home_Landing.html" class="brand-wrap">
+      <div class="star-icon"></div>
+      <span class="brand-title">Zelance</span>
+    </a>
+    <nav class="nav-links">
+      <a href="11_Client_Post_Project.html" class="nav-link">+ Post Project</a>
+      <a href="12_Client_Review_Proposals.html" class="nav-link active">Review Proposals</a>
+      <a href="10_Client_Profile.html" class="nav-link">Profile</a>
+      <div class="user-pill">
+        <div class="user-avatar-circle">SJ</div>
+        <span>Dr. Sarah Jenkins</span>
+      </div>
+      <a href="02_Login_Role.html" class="nav-link">Log Out</a>
+    </nav>
+  </header>
+
+  <!-- Main Content Stage -->
+  <main class="stage-container">
+    <div class="page-header-row">
+      <p class="section-eyebrow">Incoming Bids &bull; Candidate Proposals</p>
+      <h1 class="page-title">Fine-tune Llama 3 (70B) for Commercial Contracts</h1>
+      <p class="page-subtext">Original Budget: $3,500.00 &bull; 3 Proposals Submitted by AI Specialists</p>
+    </div>
+
+    <!-- Connecting database here: This page queries PROPOSALS joined with FREELANCERS where project_id = 1. Accepting a proposal updates status to ACCEPTED. -->
+
+    <!-- Proposal Card 1 (Top Candidate) -->
+    <div class="card-box mb-20 proposal-card-top">
+      <div class="proposal-header">
+        <div>
+          <h2 class="title card-title-sm">Kaveesha Fernando</h2>
+          <p class="subtext">Senior Machine Learning &amp; LLM Specialist &bull; Colombo, Sri Lanka</p>
+        </div>
+        <div>
+          <div class="page-title price-highlight">$3,200.00</div>
+          <p class="subtext">14 Days Delivery &bull; 3 Milestones</p>
+        </div>
+      </div>
+
+      <p class="subtext proposal-body">
+        "I have deployed multiple production Llama 3 70B models with vLLM and flash-attention 2. I will implement a 4-bit NF4 quantization pipeline with PEFT and deliver a benchmarked Docker container with latency under 300ms."
+      </p>
+
+      <div class="proposal-actions">
+        <!-- Connecting database here: Accepting this proposal updates PROPOSALS.proposal_status to 'ACCEPTED'. This automatically fires trigger trg_proposal_accepted_update_project to set PROJECTS.project_status = 'IN_PROGRESS' and create a new contract in ASSIGNMENTS. -->
+        <form method="post" action="16_Payment.html">
+          <input type="hidden" name="proposal_id" value="101">
+          <input type="hidden" name="bid_amount" value="3200">
+          <button type="submit" class="btn-accept">Accept Proposal &amp; Fund Escrow &rarr;</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Proposal Card 2 -->
+    <div class="card-box mb-20">
+      <div class="proposal-header">
+        <div>
+          <h2 class="title card-title-sm">Akash Maduranga</h2>
+          <p class="subtext">Senior MLOps &amp; Distributed Systems Engineer</p>
+        </div>
+        <div>
+          <div class="page-title price-regular">$3,400.00</div>
+          <p class="subtext">18 Days Delivery</p>
+        </div>
+      </div>
+
+      <p class="subtext proposal-body">
+        "Full Kubeflow MLOps fine-tuning pipeline with automated evaluation tests on custom legal taxonomy."
+      </p>
+
+      <div class="proposal-actions">
+        <!-- Connecting database here: Accepting this proposal updates PROPOSALS.proposal_status to 'ACCEPTED'. This automatically fires trigger trg_proposal_accepted_update_project to set PROJECTS.project_status = 'IN_PROGRESS' and create a new contract in ASSIGNMENTS. -->
+        <form method="post" action="16_Payment.html">
+          <input type="hidden" name="proposal_id" value="102">
+          <input type="hidden" name="bid_amount" value="3400">
+          <button type="submit" class="btn-accept">Accept Proposal &amp; Fund Escrow &rarr;</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
