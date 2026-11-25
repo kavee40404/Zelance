@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  Page: 07_Freelancer_Step2_Education.html
+  Part: Part B (Freelancer side)
+  Purpose: Step 2 of freelancer profile setup covering academic degrees, university, and portfolio credentials.
+  Database tables: FREELANCER_EDUCATION
+-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zelance - Freelancer Onboarding Step 2 (Education)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/zelance.css">
+</head>
+<body class="center-layout">
+
+  <main class="onboard-box">
+    <div class="stepper">Step 2 of 3 &bull; Academic Background</div>
+    <h1 class="title">Education &amp; Credentials</h1>
+    <p class="subtext">Add degrees and verify technical experience.</p>
+
+    <!-- Connecting database here: this form saves degree, institution, graduation_year, and portfolio_url into the FREELANCER_EDUCATION table. -->
+    <form method="post" action="08_Freelancer_Step3_Preferences.html">
+      <div class="form-group">
+        <label class="label">Degree / Academic Qualification</label>
+        <div class="input-box">
+          <input type="text" name="degree" value="BSc (Hons) in Computer Science (Artificial Intelligence)" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="label">University / Institution</label>
+        <div class="input-box">
+          <input type="text" name="institution" value="Plymouth University / NSBM Green University" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="label">Years of Practical AI Experience</label>
+        <div class="input-box">
+          <input type="text" name="experience_years" value="4.5 Years">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="label">Portfolio / GitHub Profile URL</label>
+        <div class="input-box">
+          <input type="url" name="portfolio_url" value="https://github.com/kaveewithgravity">
+        </div>
+      </div>
+
+      <button type="submit" class="btn-next mt-12">
+        Next: Work Preferences &amp; Rates <span>&rarr;</span>
+      </button>
+    </form>
+  </main>
+
+</body>
+</html>
