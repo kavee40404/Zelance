@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  Page: 13_Freelancer_Dashboard.html
+  Part: Part B (Freelancer side)
+  Purpose: Main workspace and overview dashboard for freelancers showing project performance and pending proposals.
+  Database tables: FREELANCERS, PROPOSALS, PAYMENTS
+-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zelance - Freelancer Studio Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/zelance.css">
+</head>
+<body class="dashboard-layout">
+
+  <!-- Sidebar Navigation -->
+  <aside class="side-nav">
+    <a href="01_Home_Landing.html" class="brand-wrap brand-title-light">
+      <div class="star-icon"></div>
+      <span class="brand-title brand-title-light">Zelance</span>
+    </a>
+    <div class="side-nav-links">
+      <a href="13_Freelancer_Dashboard.html" class="active">Overview Dashboard</a>
+      <a href="14_Freelancer_Browse_Projects.html">Browse AI Projects</a>
+      <a href="15_Project_Progress.html">Project Progress</a>
+      <a href="09_Skills_And_Services.html">My Skills</a>
+      <a href="02_Login_Role.html" class="mt-20">Log Out</a>
+    </div>
+  </aside>
+
+  <!-- Main Dashboard Area -->
+  <main class="main-area">
+    <div>
+      <p class="section-eyebrow">Specialist Workspace &bull; Performance Overview</p>
+      <h1 class="page-title">Welcome back, Kaveesha</h1>
+    </div>
+
+    <!-- Connecting database here: This section aggregates proposal counts, contract status, and sum of payment amounts for the current freelancer_id. -->
+
+    <!-- 4 KPI Metrics -->
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <span class="kpi-label">Pending Proposals</span>
+        <div class="kpi-num text-terracotta">12</div>
+        <p class="subtext">3 Under Review</p>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Active Contracts</span>
+        <div class="kpi-num">8</div>
+        <p class="subtext">On Track</p>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Average Client Rating</span>
+        <div class="kpi-num rating-val">4.8 / 5.0</div>
+        <p class="subtext">Based on 28 Reviews</p>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Total Earnings</span>
+        <div class="kpi-num text-success">$2,450.00</div>
+        <p class="subtext">Completed Projects</p>
+      </div>
+    </div>
+
+    <!-- Recommended Project Feed -->
+    <div class="feed-card">
+      <h2 class="title card-title-sm">Open Project Advertisements (Recommended for your Skills)</h2>
+      <div class="feed-item-box">
+        <div>
+          <h3 class="title feed-title">Fine-tune Llama 3 (70B) for Commercial Contract Analysis</h3>
+          <p class="subtext mt-6">NeuralCloud Enterprise &bull; Fixed Price: $3,500.00 &bull; 3 Proposals</p>
+        </div>
+        <a href="14_Freelancer_Browse_Projects.html" class="btn-terracotta feed-btn">View &amp; Submit Bid &rarr;</a>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
