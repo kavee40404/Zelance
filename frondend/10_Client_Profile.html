@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  Page: 10_Client_Profile.html
+  Part: Part A (Accounts and start)
+  Purpose: Client organization profile and account overview showing company details and project activity.
+  Database tables: CLIENTS
+-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zelance - Organization Profile &amp; Billing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/zelance.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+    <a href="01_Home_Landing.html" class="brand-wrap">
+      <div class="star-icon"></div>
+      <span class="brand-title">Zelance</span>
+    </a>
+    <nav class="nav-links">
+      <a href="11_Client_Post_Project.html" class="nav-link">+ Post Project</a>
+      <a href="12_Client_Review_Proposals.html" class="nav-link">Review Proposals</a>
+      <a href="10_Client_Profile.html" class="nav-link active">Profile</a>
+      <div class="user-pill">
+        <div class="user-avatar-circle">CL</div>
+        <span>Client Account</span>
+      </div>
+      <a href="02_Login_Role.html" class="nav-link">Log Out</a>
+    </nav>
+  </header>
+
+  <!-- Main Content Stage -->
+  <main class="stage-container">
+    <div class="page-header-row">
+      <p class="section-eyebrow">Enterprise Account</p>
+      <h1 class="page-title">Organization Profile &amp; Billing</h1>
+      <p class="page-subtext">Manage organization identity, billing contacts, and project expenditures.</p>
+    </div>
+
+    <!-- KPI Statistics Grid -->
+    <div class="kpi-grid mb-24">
+      <div class="kpi-card">
+        <span class="kpi-label">Total Platform Spend</span>
+        <div class="kpi-num">LKR 0.00</div>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Projects Funded</span>
+        <div class="kpi-num">0 Projects</div>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Verification Status</span>
+        <div class="kpi-num text-success">Verified</div>
+      </div>
+    </div>
+
+    <!-- Company Details Card -->
+    <!-- Connecting database here: this form saves company_name, contact_person, and industry into the CLIENTS table for this client_id. -->
+    <div class="form-card">
+      <h2 class="title card-title-sm">Company Details</h2>
+      <form method="post" action="#">
+        <div class="grid-2col">
+          <div class="form-group">
+            <label class="label">Company Name</label>
+            <div class="input-box">
+              <input type="text" name="company_name" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="label">Industry Sector</label>
+            <div class="input-box">
+              <input type="text" name="industry" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2col mt-12">
+          <div class="form-group">
+            <label class="label">Headquarters Location</label>
+            <div class="input-box">
+              <input type="text" name="headquarters">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="label">Contact Person</label>
+            <div class="input-box">
+              <input type="text" name="contact_person" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions mt-20">
+          <button type="submit" class="btn-terracotta">Save Profile Updates</button>
+          <a href="11_Client_Post_Project.html" class="btn-secondary">Post New Project Advertisement</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+</body>
+</html>

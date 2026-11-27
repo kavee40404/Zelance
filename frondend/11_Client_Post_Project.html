@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  Page: 11_Client_Post_Project.html 
+-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zelance - Post an AI Project Advertisement</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/zelance.css">
+</head>
+<body>
+
+
+
+  <!-- Top Navi Bar -->
+  <header class="top-nav">
+    <a href="01_Home_Landing.html" class="brand-wrap">
+      <div class="star-icon"></div>
+      <span class="brand-title">Zelance</span>
+    </a>
+    <nav class="nav-links">
+      <a href="11_Client_Post_Project.html" class="nav-link active">Post Project</a>
+      <a href="12_Client_Review_Proposals.html" class="nav-link">Review Proposals</a>
+      <a href="10_Client_Profile.html" class="nav-link">Profile</a>
+
+
+      <!-- Static placeholder in plain HTML; use 11_Client_Post_Project.php for dynamic session user -->
+      <div class="user-pill">
+        <div class="user-avatar-circle">SJ</div>
+        <span>Dr. Sarah Jenkins</span>
+      </div>
+      <a href="02_Login_Role.html" class="nav-link">Log Out</a>
+    </nav>
+  </header>
+
+
+
+  <!-- Main Content Stage -->
+  <main class="stage-container">
+    <div class="page-header-row">
+      <p class="section-eyebrow">Client Workspace • Advertisement Flow</p>
+      <h1 class="page-title">Post an AI Project Advertisement</h1>
+      <p class="page-subtext">Publish technical scope and requirements to solicit competitive proposals from verified AI specialists.</p>
+    </div>
+
+
+
+    <!-- Connecting database here: sends POST data to php/save_project.php for PROJECTS and PROJECT_REQUIREMENTS[cite: 12, 18, 27]. -->
+    <div class="post-layout-grid">
+      <div class="form-card">
+        <form method="post" action="../backend/php/save_project.php">
+
+
+          <!-- Maps to PROJECTS.project_title[cite: 12, 27] -->
+          <div class="form-group">
+            <label class="label">Project Advertisement Title</label>
+            <div class="input-box">
+              <input
+                type="text"
+                name="project_title"
+                placeholder="Enter project title"
+                required
+              >
+            </div>
+          </div>
+
+
+          <div class="grid-2col mt-12">
+
+            <!-- Option values match PROJECTS.ai_area CHECK constraint[cite: 12, 27] -->
+            <div class="form-group">
+              <label class="label">AI Area</label>
+              <div class="input-box">
+                <select name="ai_area" required>
+                  <option value="" disabled selected>Select AI area</option>
+                  <option value="ML">Machine Learning (ML)</option>
+                  <option value="DEEP_LEARNING">Deep Learning (DEEP_LEARNING)</option>
+                  <option value="NLP">Natural Language Processing (NLP)</option>
+                  <option value="VISION">Computer Vision (VISION)</option>
+                  <option value="GENAI">Generative AI (GENAI)</option>
+                  <option value="DATA_ANALYTICS">Data Analytics (DATA_ANALYTICS)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Maps to PROJECTS.budget (CHECK >= 50)[cite: 12, 27] -->
+            <div class="form-group">
+              <label class="label">Estimated Budget (LKR)</label>
+              <div class="input-box">
+                <input
+                  type="number"
+                  name="budget"
+                  placeholder="Enter budget (min 50 LKR)"
+                  min="50"
+                  max="100000"
+                  step="50"
+                  required
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Maps to PROJECTS.description[cite: 12, 27] -->
+          <div class="form-group mt-12">
+            <label class="label">Work to Be Delivered & Requirements</label>
+            <div class="textarea-box">
+              <textarea
+                name="description"
+                rows="4"
+                placeholder="Describe the work to be delivered and technical requirements..."
+                required
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="grid-2col mt-12">
+            <!-- Maps to PROJECTS.deadline_date[cite: 12, 27] -->
+            <div class="form-group">
+              <label class="label">Target Deadline Date</label>
+              <div class="input-box">
+                <input
+                  type="date"
+                  name="deadline_date"
+                  required
+                >
+              </div>
+            </div>
+
+            <!-- Optional skill_id inserted into PROJECT_REQUIREMENTS[cite: 12, 27] -->
+            <div class="form-group">
+              <label class="label">Primary Skill ID (Optional)</label>
+              <div class="input-box">
+                <input
+                  type="number"
+                  name="skill_id"
+                  placeholder="e.g. 1"
+                  min="1"
+                >
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-terracotta mt-20 w-full">
+            Publish Advertisement to Marketplace <span>→</span>
+          </button>
+        </form>
+      </div>
+
+
+
+      <!-- Sidebar Guidance Card -->
+      <aside class="sidebar-wrapper">
+        <div class="info-card">
+          <h3 class="info-card-title">Payment Protection Guarantee</h3>
+          <p class="info-card-p">Your project payment remains safely held until you review and approve each completed stage of project progress.</p>
+          <div class="guarantee-box">
+            <div class="guarantee-title">Clear Project Progress Flow</div>
+            <p class="info-card-p">Clients keep control over payments until work to be delivered meets agreed goals.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+</body>
+</html>

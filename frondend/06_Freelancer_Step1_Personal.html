@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  Page: 06_Freelancer_Step1_Personal.html
+  Part: Part B (Freelancer side)
+  Purpose: Step 1 of freelancer profile setup covering professional headline, bio, and location.
+  Database tables: FREELANCERS
+-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zelance - Freelancer Onboarding Step 1 (Personal Info)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/zelance.css">
+</head>
+<body class="center-layout">
+
+  <main class="onboard-box">
+    <div class="stepper">Step 1 of 3 &bull; Specialist Profile</div>
+    <h1 class="title">Personal Information</h1>
+    <p class="subtext">Provide your professional identity for client reviews.</p>
+
+    <!-- Connecting database here: this form saves first_name, last_name, tagline, bio, and location into the FREELANCERS table for this freelancer_id. -->
+    <form method="post" action="07_Freelancer_Step2_Education.html">
+      <div class="form-group">
+        <label class="label">Full Legal Name</label>
+        <div class="input-box">
+          <input type="text" name="full_name" value="Kaveesha Fernando" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="label">Professional Headline</label>
+        <div class="input-box">
+          <input type="text" name="tagline" value="Senior Machine Learning &amp; LLM Specialist" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="label">Bio Summary</label>
+        <div class="textarea-box">
+          <textarea name="bio" rows="4">5+ years building and deploying deep learning and LLM architectures. Specializing in PyTorch, parameter-efficient fine-tuning, and low-latency inference.</textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="label">Location &amp; Timezone</label>
+        <div class="input-box">
+          <input type="text" name="location" value="Colombo, Sri Lanka (UTC+5:30)">
+        </div>
+      </div>
+
+      <button type="submit" class="btn-next mt-12">
+        Next: Education &amp; Experience <span>&rarr;</span>
+      </button>
+    </form>
+  </main>
+
+</body>
+</html>

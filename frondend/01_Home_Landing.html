@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  Page: 01_Home_Landing.html
+  Part: Part A (Accounts and start)
+  Purpose: Public landing page showing hero introduction, search bar, and six AI Job area cards with open project counts.
+  Database tables: PROJECTS
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zelance - AI Projects and Services Freelancing Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/zelance.css">
+</head>
+
+<body class="home-canvas-bg">
+
+  <!-- Main viewport canvas with 3D decorative clay shapes -->
+  <div class="viewport-canvas">
+    <div class="clay-sphere-top"></div>
+    <div class="clay-cylinder-left"></div>
+    <div class="clay-cone-bottom"></div>
+    <div class="clay-cube-topright"></div>
+    <div class="clay-capsule-bottomright"></div>
+
+    <div class="main-app-card">
+      <!-- Navigation bar -->
+      <nav class="top-nav home-top-nav">
+        <a href="01_Home_Landing.html" class="logo-container">
+          <div class="logo-symbol">
+            <div class="star-icon"></div>
+          </div>
+          <span class="logo-text">Zelance</span>
+        </a>
+        <div class="nav-menu">
+          <a href="14_Freelancer_Browse_Projects.html" class="nav-link">Find a Freelancer</a>
+          <a href="11_Client_Post_Project.html" class="nav-link">Find a Client</a>
+          <a href="14_Freelancer_Browse_Projects.html" class="nav-link">AI Areas</a>
+        </div>
+        <div class="nav-actions">
+          <a href="02_Login_Role.html" class="nav-link">Log In</a>
+          <a href="11_Client_Post_Project.html" class="btn-terracotta">Post AI Project</a>
+        </div>
+      </nav>
+
+      <!-- Hero grid with text and illustration -->
+      <div class="hero-grid">
+        <div class="hero-left">
+          <h1 class="hero-title">
+            Find <span class="highlight-terracotta">Freelance</span> Jobs that you will love
+          </h1>
+          <p class="page-subtext home-subtext">
+            Join a network of over 1,200 verified AI specialists, researchers, and engineers finding work they love and
+            building high-impact production solutions.
+          </p>
+          <a href="14_Freelancer_Browse_Projects.html" class="btn-hero-cta">Find out more &rarr;</a>
+        </div>
+
+        <div class="hero-right-visual">
+          <div class="portrait-arch-backdrop">
+            <img src="images/Home Page img1.jpg" alt="Featured AI Freelance Specialist" class="portrait-arch-img">
+          </div>
+          <div class="badge-card-1">
+            <div class="badge-title">143 UI/UX &amp; AI Design Jobs</div>
+            <div class="badge-sub">Choose number from great project</div>
+            <a href="14_Freelancer_Browse_Projects.html" class="badge-link">See Listing &rarr;</a>
+          </div>
+          <div class="badge-card-2">
+            <div class="badge-title">87 Computer Vision Jobs</div>
+            <div class="badge-sub">Choose number from great project</div>
+            <a href="14_Freelancer_Browse_Projects.html" class="badge-link">See Listing &rarr;</a>
+          </div>
+          <div class="badge-card-3">
+            <div class="badge-title">293 Machine Learning Jobs</div>
+            <div class="badge-sub">Choose number from great project</div>
+            <a href="14_Freelancer_Browse_Projects.html" class="badge-link">See Listing &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search bar -->
+      <!-- Connecting database here: this form filters open projects from the PROJECTS table using search_keyword and ai_job_area. -->
+      <form method="post" action="#" class="search-bar-container">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" name="search_keyword" class="home-search-input" placeholder="Job Title or Keyword">
+        <select name="ai_area" class="home-search-select">
+          <option value="">All AI Areas</option>
+          <option value="ML">Machine Learning</option>
+          <option value="DEEP_LEARNING">Deep Learning</option>
+          <option value="NLP">Natural Language Processing</option>
+          <option value="VISION">Computer Vision</option>
+          <option value="GENAI">Generative AI</option>
+          <option value="DATA_ANALYTICS">Data Analytics</option>
+        </select>
+        <button type="submit" class="btn-terracotta">Search</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+
+</html>

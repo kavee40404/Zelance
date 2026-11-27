@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  Page: 14_Freelancer_Browse_Projects.html
+  Part: Part B (Freelancer side)
+  Purpose: Project search and proposal submission interface for freelancers.
+  Database tables: PROJECTS, PROPOSALS
+-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zelance - Browse Projects &amp; Submit Proposals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/zelance.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+    <a href="01_Home_Landing.html" class="brand-wrap">
+      <div class="star-icon"></div>
+      <span class="brand-title">Zelance</span>
+    </a>
+    <nav class="nav-links">
+      <a href="13_Freelancer_Dashboard.html" class="nav-link">Dashboard</a>
+      <a href="14_Freelancer_Browse_Projects.html" class="nav-link active">Browse Projects</a>
+      <a href="15_Project_Progress.html" class="nav-link">Project Progress</a>
+      <a href="09_Skills_And_Services.html" class="nav-link">Skills</a>
+      <div class="user-pill">
+        <div class="user-avatar-circle">KF</div>
+        <span>Kaveesha Fernando</span>
+      </div>
+      <a href="02_Login_Role.html" class="nav-link">Log Out</a>
+    </nav>
+  </header>
+
+  <!-- Main Content Stage -->
+  <main class="stage-container">
+    <div class="page-header-row">
+      <p class="section-eyebrow">Marketplace Search &bull; Proposal Submission</p>
+      <h1 class="page-title">Explore Open AI Projects</h1>
+      <p class="page-subtext">Find client advertisements matching your verified machine learning and LLM competencies.</p>
+    </div>
+
+    <!-- Connecting database here: This page queries PROJECTS matching search keywords, and the proposal form inserts into the PROPOSALS table. -->
+
+    <div class="post-layout-grid">
+      <!-- Project Scope Card -->
+      <div class="card-box">
+        <div class="proposal-header">
+          <div>
+            <h2 class="title card-title-sm">Fine-tune Llama 3 (70B) for Commercial Contract Analysis</h2>
+            <p class="subtext mt-6">Posted by NeuralCloud Enterprise &bull; 2 hours ago</p>
+          </div>
+          <div>
+            <div class="page-title price-regular text-terracotta">$3,500.00</div>
+            <p class="subtext">Fixed Price Budget</p>
+          </div>
+        </div>
+
+        <p class="subtext proposal-body">
+          Must quantize 70B model using 4-bit QLoRA on NVIDIA A100 GPUs. Deliverable includes training scripts, validation notebooks, and a Dockerized FastAPI endpoint with latency under 300ms.
+        </p>
+
+        <div class="tags-row">
+          <span class="tag-pill">PyTorch</span>
+          <span class="tag-pill">Hugging Face</span>
+          <span class="tag-pill">LoRA / QLoRA</span>
+          <span class="tag-pill">FastAPI</span>
+        </div>
+      </div>
+
+      <!-- Proposal Submission Form Card -->
+      <div class="form-card">
+        <h2 class="title card-title-sm">Submit Your Proposal</h2>
+        <form method="post" action="13_Freelancer_Dashboard.html">
+          <input type="hidden" name="project_id" value="1">
+
+          <div class="form-group">
+            <label class="label">Your Bid Amount ($ USD)</label>
+            <div class="input-box">
+              <input type="number" name="bid_amount" value="3200" min="100" max="50000" step="50" required>
+            </div>
+          </div>
+
+          <div class="form-group mt-12">
+            <label class="label">Estimated Delivery Time (Days)</label>
+            <div class="input-box">
+              <input type="number" name="delivery_days" value="14" min="1" max="180" required>
+            </div>
+          </div>
+
+          <div class="form-group mt-12">
+            <label class="label">Cover Letter &amp; Technical Approach</label>
+            <div class="textarea-box">
+              <textarea name="cover_letter" rows="4" required>I have deployed multiple production Llama 3 70B models with vLLM and flash-attention 2. I will implement a 4-bit NF4 quantization pipeline with PEFT and deliver a benchmarked Docker container with latency under 300ms.</textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-terracotta mt-20 w-full">
+            Submit Technical Proposal <span>&rarr;</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
