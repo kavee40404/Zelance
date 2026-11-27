@@ -75,10 +75,42 @@ VALUES
 
 
 
-SELECT * FROM CLIENTS;
+S;
 
 
 
+INSERT INTO AI_SKILLS (skill_name, ai_area)
+VALUES
+('scikit-learn',              'ML'),
+('XGBoost',                   'ML'),
+('PyTorch',                   'DEEP_LEARNING'),
+('TensorFlow',                'DEEP_LEARNING'),
+('Hugging Face Transformers', 'NLP'),
+('spaCy',                     'NLP'),
+('YOLOv8',                    'VISION'),
+('OpenCV',                    'VISION'),
+('QLoRA Fine-Tuning',         'GENAI'),
+('Pandas & NumPy',            'DATA_ANALYTICS');
+
+
+
+
+
+
+INSERT INTO AI_SERVICES (service_title, ai_area, description, base_price)
+VALUES
+('Custom Predictive ML Model',          'ML',             'Build and train classification or regression models for business forecasting.', 85000.00),
+('Customer Churn Prediction',           'ML',             'Predict customer drop-off using historical behavior and scikit-learn pipelines.', 75000.00),
+('Deep Neural Network Training',        'DEEP_LEARNING',  'Design and optimize multi-layer PyTorch models on GPU.', 120000.00),
+('Time-Series LSTM Forecasting',        'DEEP_LEARNING',  'Sequence modeling for demand, energy, or financial time-series data.', 110000.00),
+('Sinhala & English Sentiment Engine',  'NLP',            'Text classification and sentiment analysis using Transformers.', 95000.00),
+('Document Named Entity Extraction',    'NLP',            'Automatically extract names, dates, and clauses from PDFs and contracts.', 90000.00),
+('YOLOv8 Visual Defect Detection',      'VISION',         'Real-time image and video object detection for quality inspection.', 130000.00),
+('OCR & Invoice Scanning Pipeline',     'VISION',         'Extract structured text from scanned receipts and forms.', 80000.00),
+('Private LLM Fine-Tuning (Llama 3)',   'GENAI',          'Fine-tune open-source LLMs with QLoRA on custom domain documents.', 160000.00),
+('Business Data Cleaning & Dashboard',  'DATA_ANALYTICS', 'Clean raw datasets with Pandas and produce analytical summaries.', 55000.00);
+
+SELECT * FROM AI_SERVICES
 
 
 
