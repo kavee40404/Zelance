@@ -1,3 +1,7 @@
+
+-- Kaveesha's Part- Part A
+
+
 CREATE DATABASE ZelanceDB;
 USE ZelanceDB;
 
@@ -110,7 +114,27 @@ VALUES
 ('Private LLM Fine-Tuning (Llama 3)',   'GENAI',          'Fine-tune open-source LLMs with QLoRA on custom domain documents.', 160000.00),
 ('Business Data Cleaning & Dashboard',  'DATA_ANALYTICS', 'Clean raw datasets with Pandas and produce analytical summaries.', 55000.00);
 
-SELECT * FROM AI_SERVICES
+--SELECT * FROM AI_SERVICES
+
+USE ZelanceDB;
+
+--Creating 5% paltform Fee
+
+CREATE FUNCTION fn_calculate_platform_fee (@amount DECIMAL(10,2))
+RETURNS DECIMAL(10,2)
+AS
+BEGIN
+    RETURN @amount * 0.05;
+END;
+
+SELECT dbo.fn_calculate_platform_fee(100000.00) AS PlatformFee;
+
+
+
+
+
+
+
 
 
 
