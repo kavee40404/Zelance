@@ -1,0 +1,47 @@
+CREATE DATABASE ZelanceDB;
+USE ZelanceDB;
+
+
+CREATE TABLE USERS (
+    user_id INT IDENTITY(1,1) PRIMARY KEY,
+    full_name NVARCHAR(100) NOT NULL,
+    email NVARCHAR(150) UNIQUE NOT NULL,
+    password_hash NVARCHAR(255) NOT NULL,
+    role NVARCHAR(20) NOT NULL CHECK (role IN ('CLIENT', 'FREELANCER', 'ADMIN')),
+    status NVARCHAR(20) DEFAULT 'ACTIVE' CHECK (status IN ('ACTIVE', 'BLOCKED')),
+    created_at DATETIME2 DEFAULT SYSDATETIME()
+);
+
+
+CREATE TABLE CLIENTS (
+    client_id INT PRIMARY KEY FOREIGN KEY REFERENCES USERS(user_id),
+    company_name NVARCHAR(150) NOT NULL,
+    industry NVARCHAR(100) NOT NULL,
+    company_address NVARCHAR(255) NOT NULL,
+    verified_status NVARCHAR(20) DEFAULT 'UNVERIFIED',
+    total_spent DECIMAL(10,2) DEFAULT 0.00
+);
+
+
+
+
+CREATE TABLE AI_SKILLS (
+    skill_id INT IDENTITY(1,1) PRIMARY KEY,
+    skill_name NVARCHAR(100) UNIQUE NOT NULL,
+    ai_area NVARCHAR(30) CHECK (ai_area IN ('ML', 'DEEP_LEARNING', 'NLP', 'VISION', 'GENAI', 'DATA_ANALYTICS'))
+);
+
+CREATE TABLE AI_SERVICES (
+    service_id INT IDENTITY(1,1) PRIMARY KEY,
+    service_title NVARCHAR(150) UNIQUE NOT NULL,
+    ai_area NVARCHAR(30) NOT NULL,
+    description NVARCHAR(MAX),
+    base_price DECIMAL(10,2) CHECK (base_price >= 0)
+);
+
+
+
+
+
+
+
