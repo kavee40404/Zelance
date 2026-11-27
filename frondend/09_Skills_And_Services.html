@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  Page: 09_Skills_And_Services.html
+  Part: Part B (Freelancer side)
+  Purpose: Selection of verified AI skills that connect freelancer profiles to client project requirements.
+  Database tables: AI_SKILLS, FREELANCER_SKILLS
+-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zelance - Select Verified AI Skills</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/zelance.css">
+</head>
+<body class="center-layout">
+
+  <main class="skills-box">
+    <div class="stepper">Specialist Profile &bull; Skills &amp; Services</div>
+    <h1 class="title">Select Verified AI Skills</h1>
+    <p class="subtext">These skills match your profile with client project advertisements.</p>
+
+    <!-- Connecting database here: This form inserts records into the FREELANCER_SKILLS bridge table referencing the selected skill_id values from the AI_SKILLS table. -->
+    <form method="post" action="13_Freelancer_Dashboard.html">
+      <div class="skill-grid">
+        <label class="skill-checkbox-pill">
+          <input type="checkbox" name="skills" value="1" checked> Generative AI &amp; Large Language Models
+        </label>
+        <label class="skill-checkbox-pill">
+          <input type="checkbox" name="skills" value="2" checked> Fine-Tuning &amp; Model Adaptation
+        </label>
+        <label class="skill-checkbox-pill">
+          <input type="checkbox" name="skills" value="3" checked> PyTorch &amp; Deep Learning Frameworks
+        </label>
+        <label class="skill-checkbox-pill">
+          <input type="checkbox" name="skills" value="4" checked> Transformers &amp; Foundation Models
+        </label>
+        <label class="skill-checkbox-pill">
+          <input type="checkbox" name="skills" value="5" checked> FastAPI &amp; Model Serving APIs
+        </label>
+        <label class="skill-checkbox-pill">
+          <input type="checkbox" name="skills" value="6" checked> Computer Vision &amp; Image Processing
+        </label>
+        <label class="skill-checkbox-pill">
+          <input type="checkbox" name="skills" value="7"> Natural Language Processing
+        </label>
+        <label class="skill-checkbox-pill">
+          <input type="checkbox" name="skills" value="8"> Predictive Modeling &amp; Data Science
+        </label>
+        <label class="skill-checkbox-pill">
+          <input type="checkbox" name="skills" value="9"> Docker &amp; Cloud Deployment
+        </label>
+        <label class="skill-checkbox-pill">
+          <input type="checkbox" name="skills" value="10"> Retrieval-Augmented Generation
+        </label>
+      </div>
+
+      <button type="submit" class="btn-next mt-20">
+        Save Skills &amp; Open Freelancer Dashboard <span>&rarr;</span>
+      </button>
+    </form>
+  </main>
+
+</body>
+</html>

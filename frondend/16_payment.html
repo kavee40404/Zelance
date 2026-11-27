@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zelance - Project Payment Checkout</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/zelance.css">
+</head>
+<body>
+
+    <header class="top-nav">
+    <a href="01_Home_Landing.html" class="brand-wrap">
+      <div class="star-icon"></div>
+      <span class="brand-title">Zelance</span>
+    </a>
+
+    <div class="stepper-row">
+      <div class="step-badge completed">
+        <span class="step-circle">&check;</span>
+        <span>1. Proposal Accepted</span>
+      </div>
+      <span class="stepper-separator">&mdash;&mdash;&mdash;</span>
+      <div class="step-badge active">
+        <span class="step-circle">2</span>
+        <span>2. Secure Deposit</span>
+      </div>
+      <span class="stepper-separator">&mdash;&mdash;&mdash;</span>16
+      <div class="step-badge">
+        <span class="step-circle">3</span>
+        <span>3. Contract Active</span>
+      </div>
+    </div>
+
+    <div class="user-pill">
+      <div class="user-avatar-circle">SJ</div>
+      <span>Dr. Sarah Jenkins</span>
+    </div>
+  </header>
+    <!-- Main Content Stage -->
+  <main class="stage-container">
+    <div class="page-header-row">
+      <p class="section-eyebrow">Client Workspace &bull; Payment Checkout</p>
+      <h1 class="page-title">Fund Project Payment</h1>
+      <p class="page-subtext">Deposit project funds securely. Your payment is held safely and only released when you approve milestone deliverables.</p>
+    </div>
+
+    <!-- Connecting database here: Submitting this form calls fn_calculate_platform_fee, inserts a row into PAYMENTS with status 'PAID', which automatically fires trigger trg_payment_update_balance to update FREELANCERS.total_earned and CLIENTS.total_spent. -->
+
+    <div class="post-layout-grid">
+      <!-- Payment Details Card -->
+      <div class="card-box">
+        <h2 class="title card-title-sm">Payment Method</h2>
+
+        <form method="post" action="17_Payment_Done.html">
+          <input type="hidden" name="project_id" value="1">
+          <input type="hidden" name="amount" value="3200">
+
+          <div class="form-group mt-12">
+            <label class="label">Payment Source</label>
+            <div class="input-box">
+              <select name="payment_method">
+                <option value="BANK_TRANSFER" selected>Bank Direct Transfer (Verified Business Account)</option>
+                <option value="PLATFORM_BALANCE">Pre-Funded Platform Balance ($12,000.00 Available)</option>
+                <option value="CORPORATE_INVOICE">Corporate Monthly Billing Account</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group mt-12">
+            <label class="label">Billing Reference / PO Number</label>
+            <div class="input-box">
+              <input type="text" name="billing_reference" value="PO-2026-NEURAL-088">
+            </div>
+          </div>
+
+          <div class="form-group mt-12">
+            <label class="label">Authorized Billing Contact</label>
+            <div class="input-box">
+              <input type="text" name="billing_contact" value="Dr. Sarah Jenkins (Head of AI R&amp;D)">
+            </div>
+          </div>
+
+          <button type="submit" class="btn-terracotta mt-20 w-full">
+            Authorize Payment Deposit - $3,360.00 <span>&rarr;</span>
+          </button>
+
+          <p class="subtext mt-12 subtext-center">
+            Funds are transferred to Zelance secure holding and protected until milestone approval.
+          </p>
+        </form>
+      </div>
+
+      <!-- Contract Summary Aside -->
+      <aside class="sidebar-wrapper">
+        <div class="summary-card">
+          <h2 class="title card-title-sm">Contract Payment Summary</h2>
+
+          <div class="project-header-snippet mt-12">
+            <h3 class="title feed-title">Fine-tune Llama 3 (70B) for Commercial Contracts</h3>
+            <p class="subtext mt-6"><strong>Awarded Specialist:</strong> Kaveesha Fernando &bull; Rating 4.9</p>
+          </div>
+
+          <div class="price-list">
+            <div class="price-line-row">
+              <span>Agreed Specialist Proposal:</span>
+              <strong>$3,200.00</strong>
+            </div>
+            <div class="price-line-fee">
+              <span>Platform Service Fee (5%):</span>
+              <strong>+$160.00</strong>
+            </div>
+            <div class="price-line-subtle">
+              <span>Milestone Release Guarantee:</span>
+              <span>Included</span>
+            </div>
+            <div class="price-line-total">
+              <span>Total Payment Deposit:</span>
+              <span class="text-espresso">$3,360.00</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+    
+</body>
+</html>
