@@ -58,11 +58,24 @@ VALUES
 ('System Admin',       'admin@zelance.dev',          'hash_demo_123', 'ADMIN', 'ACTIVE');
 
 
-SELECT * FROM USERS;
+
+
+INSERT INTO CLIENTS (client_id, company_name, industry, company_address, verified_status, total_spent)
+VALUES
+(1,  'Lanka Legal Tech',        'Legal Technology',   'No. 45, Galle Road, Colombo 03',          'VERIFIED',   0.00),
+(2,  'Ceylon Tea Exports',      'Agriculture & Export', 'No. 18, Union Place, Colombo 02',       'VERIFIED',   180000.00),
+(3,  'Colombo Media Lab',       'Digital Media',      'No. 92, Duplication Road, Colombo 04',    'VERIFIED',   120000.00),
+(4,  'Serendib FinTech',        'Financial Services', 'Level 12, World Trade Center, Colombo 01','VERIFIED',   450000.00),
+(5,  'Kandy Health AI',         'Healthcare Tech',    'No. 77, Peradeniya Road, Kandy',          'VERIFIED',   210000.00),
+(6,  'Galle Logistics Ltd',     'Supply Chain',       'No. 14, Matara Road, Galle',              'UNVERIFIED', 0.00),
+(7,  'Ceylon Retail Group',     'E-Commerce',         'No. 210, High Level Road, Nugegoda',      'VERIFIED',   95000.00),
+(8,  'Island AgriTech',         'Smart Farming',      'No. 33, Negombo Road, Kurunegala',        'VERIFIED',   75000.00),
+(9,  'Lanka Insure Corp',       'Insurance',          'No. 60, Dharmapala Mawatha, Colombo 07',  'VERIFIED',   310000.00),
+(10, 'Colombo Port Tech',       'Maritime Systems',   'No. 08, Chaithya Road, Colombo 01',       'UNVERIFIED', 0.00);
 
 
 
-
+SELECT * FROM CLIENTS;
 
 
 
