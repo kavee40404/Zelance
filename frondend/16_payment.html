@@ -8,10 +8,60 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/zelance.css">
-</head>
-<body>
 
-    <header class="top-nav">
+  <style>
+
+  body.payment-page {
+    background: #F1EDE5;
+}
+
+.payment-page .stage-container {
+    max-width: 1150px;
+    margin: 45px auto;
+}
+
+.payment-page .page-title {
+    font-size: 42px;
+    letter-spacing: -1px;
+}
+
+.payment-page .card-box {
+    border-radius: 20px;
+    border: 1px solid #E2D8CC;
+    box-shadow: 0 8px 25px rgba(37, 33, 30, 0.05);
+    transition: 0.2s ease;
+}
+
+.payment-page .card-box:hover {
+    box-shadow: 0 12px 30px rgba(37, 33, 30, 0.08);
+}
+
+.payment-page .btn-terracotta {
+    border-radius: 12px;
+    min-height: 54px;
+    background: linear-gradient(135deg, #B76E50, #A15B40);
+    transition: 0.2s ease;
+}
+
+.payment-page .btn-terracotta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(183, 110, 80, 0.25);
+}
+
+@media (max-width: 768px) {
+    .payment-page .page-title {
+        font-size: 32px;
+    }
+
+    .payment-page .card-box {
+        padding: 24px;
+    }
+}
+  </style>
+</head>
+<body class="payment-checkout-page">
+
+ <header class="top-nav">
     <a href="01_Home_Landing.html" class="brand-wrap">
       <div class="star-icon"></div>
       <span class="brand-title">Zelance</span>
@@ -27,7 +77,7 @@
         <span class="step-circle">2</span>
         <span>2. Secure Deposit</span>
       </div>
-      <span class="stepper-separator">&mdash;&mdash;&mdash;</span>16
+      <span class="stepper-separator">&mdash;&mdash;&mdash;</span>
       <div class="step-badge">
         <span class="step-circle">3</span>
         <span>3. Contract Active</span>
