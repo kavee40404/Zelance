@@ -326,35 +326,7 @@ CREATE TABLE dbo.FREELANCER_SERVICES
 GO
 
 
-USE ZelanceDB;
-GO
 
-CREATE TABLE dbo.FREELANCER_SKILLS
-(
-    freelancer_id INT NOT NULL,
-    skill_id INT NOT NULL,
-    skill_level NVARCHAR(20) NULL,
-    years_experience INT NULL,
-
-    CONSTRAINT PK_FREELANCER_SKILLS
-        PRIMARY KEY (freelancer_id, skill_id),
-
-    CONSTRAINT FK_FREELANCER_SKILLS_FREELANCERS
-        FOREIGN KEY (freelancer_id)
-        REFERENCES dbo.FREELANCERS(freelancer_id),
-
-    CONSTRAINT FK_FREELANCER_SKILLS_AI_SKILLS
-        FOREIGN KEY (skill_id)
-        REFERENCES dbo.AI_SKILLS(skill_id),
-
-    CONSTRAINT CK_FREELANCER_SKILLS_LEVEL
-        CHECK (skill_level IN
-        ('Beginner', 'Intermediate', 'Expert')),
-
-    CONSTRAINT CK_FREELANCER_SKILLS_YEARS
-        CHECK (years_experience >= 0)
-);
-GO
 
 USE ZelanceDB;
 GO
