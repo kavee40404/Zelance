@@ -476,6 +476,150 @@ GO
 
 
 
+-- PART C: CLIENT PROJECTS TABLES
+
+
+CREATE TABLE dbo.PROJECTS
+(
+    project_id INT IDENTITY(1,1) PRIMARY KEY,
+    client_id INT NOT NULL
+        CONSTRAINT FK_PROJECTS_CLIENTS FOREIGN KEY REFERENCES dbo.CLIENTS(client_id),
+    project_title NVARCHAR(200) NOT NULL,
+    description NVARCHAR(MAX) NOT NULL,
+    ai_area NVARCHAR(30) NOT NULL
+        CONSTRAINT CK_PROJECTS_AI_AREA CHECK (ai_area IN ('ML', 'DEEP_LEARNING', 'NLP', 'VISION', 'GENAI', 'DATA_ANALYTICS')),
+    budget DECIMAL(10,2) NOT NULL
+        CONSTRAINT CK_PROJECTS_BUDGET CHECK (budget >= 50.00),
+    deadline_date DATE NOT NULL,
+    project_status NVARCHAR(20) NOT NULL DEFAULT 'OPEN'
+        CONSTRAINT CK_PROJECTS_STATUS CHECK (project_status IN ('OPEN', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED')),
+    posted_date DATETIME2 NOT NULL DEFAULT SYSDATETIME()
+);
+GO
+
+CREATE TABLE dbo.PROJECT_REQUIREMENTS
+(
+    requirement_id INT IDENTITY(1,1) PRIMARY KEY,
+    project_id INT NOT NULL
+        CONSTRAINT FK_REQ_PROJECTS FOREIGN KEY REFERENCES dbo.PROJECTS(project_id),
+    skill_id INT NOT NULL
+        CONSTRAINT FK_REQ_SKILLS FOREIGN KEY REFERENCES dbo.AI_SKILLS(skill_id),
+    requirement_note NVARCHAR(255) NULL
+);
+GO
+
+CREATE TABLE dbo.PROPOSALS
+(
+    proposal_id INT IDENTITY(1,1) PRIMARY KEY,
+    project_id INT NOT NULL
+        CONSTRAINT FK_PROPOSALS_PROJECTS FOREIGN KEY REFERENCES dbo.PROJECTS(project_id),
+    freelancer_id INT NOT NULL
+        CONSTRAINT FK_PROPOSALS_FREELANCERS FOREIGN KEY REFERENCES dbo.FREELANCERS(freelancer_id),
+    bid_amount DECIMAL(10,2) NOT NULL
+        CONSTRAINT CK_PROPOSALS_BID CHECK (bid_amount >= 10.00),
+    delivery_days INT NOT NULL
+        CONSTRAINT CK_PROPOSALS_DAYS CHECK (delivery_days >= 1),
+    message NVARCHAR(MAX) NOT NULL,
+    proposal_status NVARCHAR(20) NOT NULL DEFAULT 'PENDING'
+        CONSTRAINT CK_PROPOSALS_STATUS CHECK (proposal_status IN ('PENDING', 'ACCEPTED', 'REJECTED')),
+    submitted_date DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    CONSTRAINT UQ_PROPOSALS_PROJECT_FREELANCER UNIQUE (project_id, freelancer_id)
+);
+GO
+
+
+-- PART C: SAMPLE DATA (10+ ROWS PER TABLE)
+
+
+INSERT INTO dbo.PROJECTS (client_id, project_title, description, ai_area, budget, deadline_date, project_status)
+VALUES
+(1,  'Fine-tune Llama 3 for Legal Contracts',    'Fine-tune open LLM with QLoRA for contract clause review and extraction.', 'GENAI',          3500.00, '2026-12-20', 'OPEN'),
+(2,  'Detect Defects on Tea Leaves with YOLOv8',  'Real-time defect detection on tea leaves from conveyor camera feeds.',     'VISION',         1800.00, '2026-12-22', 'OPEN'),
+(3,  'Sinhala Sentiment Analysis',                'Classify sentiment across Sinhala news and social media posts.',            'NLP',            1200.00, '2026-12-18', 'OPEN'),
+(4,  'Credit Risk Scoring Model',                 'Build gradient boosted credit risk model for loan applicants.',             'ML',             2400.00, '2026-12-25', 'OPEN'),
+(5,  'Clinical Triage Time-Series Forecast',      'Forecast patient arrival spikes using sequence deep learning models.',     'DEEP_LEARNING',  2900.00, '2026-12-28', 'OPEN'),
+(6,  'Container Route Delay Predictor',           'Predict port-to-warehouse shipment delays using historical transit logs.', 'ML',             1500.00, '2026-12-19', 'OPEN'),
+(7,  'Customer Churn Early Warning',              'Identify at-risk retail customers from purchase frequency and returns.',   'ML',             1100.00, '2026-12-17', 'OPEN'),
+(8,  'Crop Yield & Rainfall Analytics',           'Clean regional weather and harvest data and build summary dashboards.',  'DATA_ANALYTICS',  950.00, '2026-12-16', 'OPEN'),
+(9,  'Claim Document Entity Extractor',           'Extract policy numbers, dates, and claim amounts from PDF forms.',       'NLP',            1750.00, '2026-12-24', 'OPEN'),
+(10, 'Vessel Berthing Vision Monitor',            'Detect berth occupancy and crane activity from harbor video streams.',    'VISION',         2600.00, '2026-12-30', 'OPEN');
+GO
+
+INSERT INTO dbo.PROJECT_REQUIREMENTS (project_id, skill_id, requirement_note)
+VALUES
+(1,  9,  'QLoRA fine-tuning on legal contract dataset'),
+(1,  5,  'Transformer evaluation and prompt tuning'),
+(2,  7,  'YOLOv8 training and export for edge inference'),
+(2,  8,  'Image preprocessing and augmentation pipeline'),
+(3,  5,  'Multilingual Transformer fine-tuning'),
+(4,  2,  'XGBoost model training and SHAP explainability'),
+(5,  3,  'PyTorch sequence model training'),
+(6,  1,  'Scikit-learn baseline and feature pipeline'),
+(7,  1,  'Churn classification model'),
+(8,  10, 'Pandas cleaning and summary reporting'),
+(9,  6,  'spaCy entity extraction pipeline'),
+(10, 7,  'YOLOv8 object detection for port cameras');
+GO
+
+INSERT INTO dbo.PROPOSALS (project_id, freelancer_id, bid_amount, delivery_days, message, proposal_status)
+VALUES
+(1, 1,  3200.00, 14, 'Experienced in QLoRA fine-tuning and legal NLP pipelines; 14-day delivery.', 'PENDING'),
+(1, 2,  3400.00, 12, 'Can deliver quantized fine-tuned model and evaluation benchmark in 12 days.', 'PENDING'),
+(1, 3,  3000.00, 18, 'Strong NLP background with transformer text extraction pipelines.', 'PENDING'),
+(2, 4,  1750.00, 10, 'Built YOLOv8 inspection models for industrial visual quality checks.', 'PENDING'),
+(3, 3,  1150.00, 8,  'Experienced with transformer classification on low-resource text.', 'PENDING'),
+(4, 1,  2300.00, 12, 'Strong experience with tabular ML and feature engineering.', 'PENDING'),
+(5, 2,  2800.00, 15, 'Experienced in PyTorch deep learning training and tuning.', 'PENDING'),
+(6, 6,  1450.00, 9,  'Can analyze transit logs and build predictive features.', 'PENDING'),
+(7, 8,  1050.00, 7,  'Ready to deliver churn scoring pipeline with clear metrics.', 'PENDING'),
+(8, 6,  900.00,  6,  'Will clean raw CSVs in Pandas and summarize key trends.', 'PENDING'),
+(9, 10, 1700.00, 10, 'Experienced with spaCy custom entity extraction workflows.', 'PENDING');
+GO
+
+
+-- PART C: STORED PROCEDURE
+
+
+CREATE PROCEDURE dbo.sp_register_project
+    @client_id INT,
+    @project_title NVARCHAR(200),
+    @description NVARCHAR(MAX),
+    @ai_area NVARCHAR(30),
+    @budget DECIMAL(10,2),
+    @deadline_date DATE,
+    @skill_id INT,
+    @requirement_note NVARCHAR(255) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        INSERT INTO dbo.PROJECTS
+            (client_id, project_title, description, ai_area, budget, deadline_date, project_status)
+        VALUES
+            (@client_id, @project_title, @description, @ai_area, @budget, @deadline_date, 'OPEN');
+
+        DECLARE @new_project_id INT = SCOPE_IDENTITY();
+
+        INSERT INTO dbo.PROJECT_REQUIREMENTS
+            (project_id, skill_id, requirement_note)
+        VALUES
+            (@new_project_id, @skill_id, @requirement_note);
+
+        COMMIT TRANSACTION;
+
+        SELECT @new_project_id AS created_project_id;
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0
+            ROLLBACK TRANSACTION;
+
+        THROW;
+    END CATCH
+END;
+GO
 
 
 
