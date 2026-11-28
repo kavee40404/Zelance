@@ -142,230 +142,384 @@ SELECT dbo.fn_calculate_platform_fee(100000.00) AS PlatformFee;
 -- PART B: FREELANCER TABLES
 -- =============================================
 
-CREATE TABLE FREELANCERS (
-    freelancer_id INT PRIMARY KEY
-        FOREIGN KEY REFERENCES USERS(user_id),
 
-    headline NVARCHAR(150),
+USE ZelanceDB;
+GO
 
-    bio_summary NVARCHAR(MAX),
+-- =============================================
+-- TABLE 1: FREELANCERS
+-- =============================================
 
-    university NVARCHAR(150),
+CREATE TABLE dbo.FREELANCERS
+(
+    freelancer_id INT NOT NULL,
+    headline NVARCHAR(150) NOT NULL,
+    bio_summary NVARCHAR(MAX) NULL,
+    location NVARCHAR(100) NOT NULL,
+    university NVARCHAR(150) NULL,
+    years_experience INT NULL,
+    github_url NVARCHAR(255) NULL,
+    hourly_rate DECIMAL(10,2) NULL,
+    availability NVARCHAR(50)
+        DEFAULT 'Full time',
+    total_earned DECIMAL(10,2)
+        DEFAULT 0.00,
 
-    years_experience INT
+    CONSTRAINT PK_FREELANCERS
+        PRIMARY KEY (freelancer_id),
+
+    CONSTRAINT FK_FREELANCERS_USERS
+        FOREIGN KEY (freelancer_id)
+        REFERENCES dbo.USERS(user_id),
+
+    CONSTRAINT CK_FREELANCERS_YEARS
         CHECK (years_experience >= 0),
 
-    github_url NVARCHAR(255),
-
-    avg_rating DECIMAL(3,2) DEFAULT 0.00
-        CHECK (avg_rating BETWEEN 0 AND 5),
-
-    total_earnings DECIMAL(12,2) DEFAULT 0.00
-        CHECK (total_earnings >= 0)
+    CONSTRAINT CK_FREELANCERS_RATE
+        CHECK (hourly_rate >= 10)
 );
+GO
 
 
-CREATE TABLE FREELANCER_SKILLS (
-    freelancer_id INT,
-    skill_id INT,
+-- =============================================
+-- TABLE 2: FREELANCER_SKILLS
+-- =============================================
 
-    PRIMARY KEY (freelancer_id, skill_id),
+CREATE TABLE dbo.FREELANCER_SKILLS
+(
+    freelancer_id INT NOT NULL,
+    skill_id INT NOT NULL,
+    skill_level NVARCHAR(20) NULL,
+    years_experience INT NULL,
 
-    FOREIGN KEY (freelancer_id)
-        REFERENCES FREELANCERS(freelancer_id),
+    CONSTRAINT PK_FREELANCER_SKILLS
+        PRIMARY KEY (freelancer_id, skill_id),
 
-    FOREIGN KEY (skill_id)
-        REFERENCES AI_SKILLS(skill_id)
+    CONSTRAINT FK_FREELANCER_SKILLS_FREELANCERS
+        FOREIGN KEY (freelancer_id)
+        REFERENCES dbo.FREELANCERS(freelancer_id),
+
+    CONSTRAINT FK_FREELANCER_SKILLS_AI_SKILLS
+        FOREIGN KEY (skill_id)
+        REFERENCES dbo.AI_SKILLS(skill_id),
+
+    CONSTRAINT CK_FREELANCER_SKILLS_LEVEL
+        CHECK (skill_level IN
+        ('Beginner', 'Intermediate', 'Expert')),
+
+    CONSTRAINT CK_FREELANCER_SKILLS_YEARS
+        CHECK (years_experience >= 0)
 );
+GO
 
 
-CREATE TABLE FREELANCER_SERVICES (
-    freelancer_id INT,
-    service_id INT,
+-- =============================================
+-- TABLE 3: FREELANCER_SERVICES
+-- =============================================
 
-    PRIMARY KEY (freelancer_id, service_id),
+CREATE TABLE dbo.FREELANCER_SERVICES
+(
+    freelancer_id INT NOT NULL,
+    service_id INT NOT NULL,
+    my_price DECIMAL(10,2) NULL,
 
-    FOREIGN KEY (freelancer_id)
-        REFERENCES FREELANCERS(freelancer_id),
+    CONSTRAINT PK_FREELANCER_SERVICES
+        PRIMARY KEY (freelancer_id, service_id),
 
-    FOREIGN KEY (service_id)
-        REFERENCES AI_SERVICES(service_id)
+    CONSTRAINT FK_FREELANCER_SERVICES_FREELANCERS
+        FOREIGN KEY (freelancer_id)
+        REFERENCES dbo.FREELANCERS(freelancer_id),
+
+    CONSTRAINT FK_FREELANCER_SERVICES_AI_SERVICES
+        FOREIGN KEY (service_id)
+        REFERENCES dbo.AI_SERVICES(service_id),
+
+    CONSTRAINT CK_FREELANCER_SERVICES_PRICE
+        CHECK (my_price >= 0)
 );
+GO
+
+PRINT 'Part B tables created successfully.';
+GO
+
+USE ZelanceDB;
+GO
+
+CREATE TABLE dbo.FREELANCERS
+(
+    freelancer_id INT NOT NULL,
+    headline NVARCHAR(150) NOT NULL,
+    bio_summary NVARCHAR(MAX) NULL,
+    location NVARCHAR(100) NOT NULL,
+    university NVARCHAR(150) NULL,
+    years_experience INT NULL,
+    github_url NVARCHAR(255) NULL,
+    hourly_rate DECIMAL(10,2) NULL,
+    availability NVARCHAR(50)
+        DEFAULT 'Full time',
+    total_earned DECIMAL(10,2)
+        DEFAULT 0.00,
+
+    CONSTRAINT PK_FREELANCERS
+        PRIMARY KEY (freelancer_id),
+
+    CONSTRAINT FK_FREELANCERS_USERS
+        FOREIGN KEY (freelancer_id)
+        REFERENCES dbo.USERS(user_id),
+
+    CONSTRAINT CK_FREELANCERS_YEARS
+        CHECK (years_experience >= 0),
+
+    CONSTRAINT CK_FREELANCERS_RATE
+        CHECK (hourly_rate >= 10)
+);
+GO
+
+CREATE TABLE dbo.FREELANCER_SKILLS
+(
+    freelancer_id INT NOT NULL,
+    skill_id INT NOT NULL,
+    skill_level NVARCHAR(20) NULL,
+    years_experience INT NULL,
+
+    CONSTRAINT PK_FREELANCER_SKILLS
+        PRIMARY KEY (freelancer_id, skill_id),
+
+    CONSTRAINT FK_FREELANCER_SKILLS_FREELANCERS
+        FOREIGN KEY (freelancer_id)
+        REFERENCES dbo.FREELANCERS(freelancer_id),
+
+    CONSTRAINT FK_FREELANCER_SKILLS_AI_SKILLS
+        FOREIGN KEY (skill_id)
+        REFERENCES dbo.AI_SKILLS(skill_id),
+
+    CONSTRAINT CK_FREELANCER_SKILLS_LEVEL
+        CHECK (skill_level IN
+        ('Beginner', 'Intermediate', 'Expert')),
+
+    CONSTRAINT CK_FREELANCER_SKILLS_YEARS
+        CHECK (years_experience >= 0)
+);
+GO
 
 
+CREATE TABLE dbo.FREELANCER_SERVICES
+(
+    freelancer_id INT NOT NULL,
+    service_id INT NOT NULL,
+    my_price DECIMAL(10,2) NULL,
+
+    CONSTRAINT PK_FREELANCER_SERVICES
+        PRIMARY KEY (freelancer_id, service_id),
+
+    CONSTRAINT FK_FREELANCER_SERVICES_FREELANCERS
+        FOREIGN KEY (freelancer_id)
+        REFERENCES dbo.FREELANCERS(freelancer_id),
+
+    CONSTRAINT FK_FREELANCER_SERVICES_AI_SERVICES
+        FOREIGN KEY (service_id)
+        REFERENCES dbo.AI_SERVICES(service_id),
+
+    CONSTRAINT CK_FREELANCER_SERVICES_PRICE
+        CHECK (my_price >= 0)
+);
+GO
 
 
 USE ZelanceDB;
 GO
 
-INSERT INTO USERS
-    (full_name, email, password_hash, role, status)
-VALUES
-('Nethmi Perera', 'nethmi@example.com', 'demo_hash', 'FREELANCER', 'ACTIVE'),
-('Ashan Silva', 'ashan@example.com', 'demo_hash', 'FREELANCER', 'ACTIVE'),
-('Ravindu Jayasuriya', 'ravindu@example.com', 'demo_hash', 'FREELANCER', 'ACTIVE'),
-('Thilini Fernando', 'thilini@example.com', 'demo_hash', 'FREELANCER', 'ACTIVE'),
-('Dinuka Wijesinghe', 'dinuka@example.com', 'demo_hash', 'FREELANCER', 'ACTIVE'),
-('Sahan Bandara', 'sahan@example.com', 'demo_hash', 'FREELANCER', 'ACTIVE'),
-('Amaya Senanayake', 'amaya@example.com', 'demo_hash', 'FREELANCER', 'ACTIVE');
+CREATE TABLE dbo.FREELANCER_SKILLS
+(
+    freelancer_id INT NOT NULL,
+    skill_id INT NOT NULL,
+    skill_level NVARCHAR(20) NULL,
+    years_experience INT NULL,
+
+    CONSTRAINT PK_FREELANCER_SKILLS
+        PRIMARY KEY (freelancer_id, skill_id),
+
+    CONSTRAINT FK_FREELANCER_SKILLS_FREELANCERS
+        FOREIGN KEY (freelancer_id)
+        REFERENCES dbo.FREELANCERS(freelancer_id),
+
+    CONSTRAINT FK_FREELANCER_SKILLS_AI_SKILLS
+        FOREIGN KEY (skill_id)
+        REFERENCES dbo.AI_SKILLS(skill_id),
+
+    CONSTRAINT CK_FREELANCER_SKILLS_LEVEL
+        CHECK (skill_level IN
+        ('Beginner', 'Intermediate', 'Expert')),
+
+    CONSTRAINT CK_FREELANCER_SKILLS_YEARS
+        CHECK (years_experience >= 0)
+);
 GO
 
+USE ZelanceDB;
+GO
 
+SELECT user_id, full_name, role
+FROM USERS
+ORDER BY user_id;
+GO
 
 
 USE ZelanceDB;
 GO
 
-INSERT INTO FREELANCERS
-    (freelancer_id, headline, bio_summary, location,
-     university, years_experience, github_url,
-     hourly_rate, availability, total_earned)
+INSERT INTO dbo.FREELANCERS
+(
+    freelancer_id,
+    headline,
+    bio_summary,
+    location,
+    university,
+    years_experience,
+    github_url,
+    hourly_rate,
+    availability
+)
 VALUES
-(1, 'Machine Learning Developer',
- 'Experienced in building predictive ML models.',
- 'Colombo', 'NSBM Green University', 2,
- 'https://github.com/nethmi', 2500.00, 'Full time', 25000.00),
+(1, 'Machine Learning Engineer',
+ 'Experienced in building predictive models and machine learning solutions.',
+ 'Colombo, Sri Lanka', 'NSBM Green University',
+ 2, 'https://github.com/sample-freelancer1', 35.00, 'Full time'),
 
-(2, 'AI & Deep Learning Engineer',
- 'Specialized in neural networks and deep learning.',
- 'Kandy', 'University of Colombo', 3,
- 'https://github.com/ashan', 3500.00, 'Full time', 45000.00),
+(2, 'Deep Learning Specialist',
+ 'Develops neural networks and deep learning applications.',
+ 'Kandy, Sri Lanka', 'University of Peradeniya',
+ 3, 'https://github.com/sample-freelancer2', 45.00, 'Part time'),
 
-(3, 'NLP Developer',
- 'Develops text processing and NLP applications.',
- 'Galle', 'University of Moratuwa', 2,
- 'https://github.com/ravindu', 2000.00, 'Full time', 18000.00),
+(3, 'NLP Engineer',
+ 'Works on text processing, chatbots and natural language applications.',
+ 'Galle, Sri Lanka', 'University of Moratuwa',
+ 2, 'https://github.com/sample-freelancer3', 40.00, 'Full time'),
 
-(4, 'Computer Vision Engineer',
- 'Works on image processing and object detection.',
- 'Colombo', 'SLIIT', 4,
- 'https://github.com/thilini', 4000.00, 'Full time', 60000.00),
+(4, 'Computer Vision Developer',
+ 'Builds image recognition and computer vision systems.',
+ 'Negombo, Sri Lanka', 'NSBM Green University',
+ 4, 'https://github.com/sample-freelancer4', 50.00, 'Full time'),
 
-(5, 'Data Analyst',
- 'Provides data cleaning and analytical solutions.',
- 'Kurunegala', 'NSBM Green University', 1,
- 'https://github.com/dinuka', 1500.00, 'Full time', 12000.00),
+(5, 'Generative AI Developer',
+ 'Creates AI-powered applications using generative AI technologies.',
+ 'Kurunegala, Sri Lanka', 'SLIIT',
+ 2, 'https://github.com/sample-freelancer5', 55.00, 'Part time'),
 
-(6, 'Generative AI Developer',
- 'Builds AI-powered applications and LLM solutions.',
- 'Negombo', 'University of Kelaniya', 3,
- 'https://github.com/sahan', 3000.00, 'Full time', 38000.00),
+(6, 'Data Analytics Specialist',
+ 'Provides data analysis, visualization and business insights.',
+ 'Matara, Sri Lanka', 'University of Ruhuna',
+ 3, 'https://github.com/sample-freelancer6', 30.00, 'Full time'),
 
 (7, 'AI Research Assistant',
- 'Interested in machine learning and AI research.',
- 'Matara', 'University of Peradeniya', 2,
- 'https://github.com/amaya', 1800.00, 'Full time', 20000.00);
+ 'Supports AI research, experimentation and model evaluation.',
+ 'Colombo, Sri Lanka', 'University of Colombo',
+ 1, 'https://github.com/sample-freelancer7', 25.00, 'Part time'),
+
+(8, 'AI Automation Developer',
+ 'Develops automation solutions using AI and machine learning.',
+ 'Ja-Ela, Sri Lanka', 'NSBM Green University',
+ 3, 'https://github.com/sample-freelancer8', 42.00, 'Full time'),
+
+(9, 'AI Model Deployment Engineer',
+ 'Deploys and maintains machine learning models in production.',
+ 'Panadura, Sri Lanka', 'SLIIT',
+ 4, 'https://github.com/sample-freelancer9', 60.00, 'Full time'),
+
+(10, 'AI Data Scientist',
+ 'Builds data-driven models and performs statistical analysis.',
+ 'Nuwara Eliya, Sri Lanka', 'University of Peradeniya',
+ 2, 'https://github.com/sample-freelancer10', 38.00, 'Part time');
 GO
 
 
+USE ZelanceDB;
+GO
 
-
-
-
-INSERT INTO FREELANCER_SKILLS
-(freelancer_id, skill_id, skill_level, years_experience)
+INSERT INTO dbo.FREELANCER_SKILLS
+(
+    freelancer_id,
+    skill_id,
+    skill_level,
+    years_experience
+)
 VALUES
-(1, 1, 'Expert', 4),
-(1, 2, 'Intermediate', 2),
-(2, 3, 'Expert', 5),
-(2, 4, 'Intermediate', 3),
-(3, 5, 'Expert', 4),
-(3, 6, 'Intermediate', 2),
-(4, 7, 'Expert', 3),
+(1, 1, 'Expert', 2),
+(1, 2, 'Intermediate', 1),
+(2, 3, 'Expert', 3),
+(2, 4, 'Intermediate', 2),
+(3, 5, 'Expert', 2),
+(3, 6, 'Intermediate', 1),
+(4, 7, 'Expert', 4),
 (4, 8, 'Intermediate', 2),
-(5, 9, 'Expert', 3),
-(5, 10, 'Intermediate', 2),
-(6, 1, 'Intermediate', 2),
-(6, 10, 'Expert', 4),
-(7, 3, 'Intermediate', 2),
-(7, 5, 'Expert', 3);
-
-
-
-
-INSERT INTO AI_SKILLS (skill_name, ai_area)
-VALUES
-('scikit-learn', 'ML'),
-('XGBoost', 'ML'),
-('PyTorch', 'DEEP_LEARNING'),
-('TensorFlow', 'DEEP_LEARNING'),
-('Hugging Face Transformers', 'NLP'),
-('spaCy', 'NLP'),
-('YOLOv8', 'VISION'),
-('OpenCV', 'VISION'),
-('QLoRA Fine-Tuning', 'GENAI'),
-('Pandas & NumPy', 'DATA_ANALYTICS');
+(5, 9, 'Expert', 2),
+(6, 10, 'Expert', 3),
+(7, 1, 'Beginner', 1),
+(7, 5, 'Intermediate', 1),
+(8, 2, 'Expert', 3),
+(8, 9, 'Intermediate', 2),
+(9, 3, 'Expert', 4),
+(9, 7, 'Intermediate', 2),
+(10, 6, 'Expert', 2),
+(10, 10, 'Intermediate', 1);
 GO
 
-INSERT INTO AI_SERVICES
-(service_title, ai_area, description, base_price)
+SELECT *
+FROM dbo.FREELANCER_SKILLS
+ORDER BY freelancer_id, skill_id;
+GO
+
+
+INSERT INTO dbo.FREELANCER_SERVICES
+(
+    freelancer_id,
+    service_id,
+    my_price
+)
 VALUES
-('Machine Learning Model Development',
- 'ML',
- 'Development of machine learning models for prediction and classification.',
- 15000),
+(1, 1, 18000.00),
+(1, 2, 14000.00),
+(2, 3, 28000.00),
+(2, 4, 22000.00),
+(3, 5, 17000.00),
+(3, 6, 19000.00),
+(4, 7, 23000.00),
+(4, 8, 13000.00),
+(5, 9, 27000.00),
+(6, 10, 12000.00),
+(7, 1, 16000.00),
+(7, 5, 15000.00),
+(8, 2, 13500.00),
+(8, 9, 24000.00),
+(9, 3, 30000.00),
+(9, 7, 21000.00),
+(10, 6, 18500.00),
+(10, 10, 11000.00);
+GO
 
-('Data Prediction System',
- 'ML',
- 'Build predictive systems using structured datasets.',
- 12000),
+SELECT *
+FROM dbo.FREELANCER_SERVICES
+ORDER BY freelancer_id, service_id;
+GO
 
-('Deep Learning Model Development',
- 'DEEP_LEARNING',
- 'Development of deep learning models for complex tasks.',
- 25000),
 
-('Neural Network Development',
- 'DEEP_LEARNING',
- 'Design and training of neural network models.',
- 20000),
 
-('Natural Language Processing',
- 'NLP',
- 'Text processing, sentiment analysis and language understanding.',
- 15000),
 
-('Chatbot Development',
- 'NLP',
- 'Development of AI-powered conversational chatbots.',
- 18000),
 
-('Computer Vision System',
- 'VISION',
- 'Image recognition and object detection solutions.',
- 20000),
 
-('Image Processing Service',
- 'VISION',
- 'Image analysis and image processing using AI.',
- 12000),
 
-('Generative AI Application',
- 'GENAI',
- 'Development of applications using generative AI models.',
- 25000),
 
-('Data Analytics and Visualization',
- 'DATA_ANALYTICS',
- 'Data analysis, reporting and visualization services.',
- 10000);
 
- INSERT INTO FREELANCER_SERVICES
-(freelancer_id, service_id, my_price)
-VALUES
-(1, 1, 18000),
-(1, 2, 15000),
-(2, 3, 28000),
-(2, 4, 22000),
-(3, 5, 17000),
-(3, 6, 20000),
-(4, 7, 25000),
-(4, 8, 15000),
-(5, 9, 30000),
-(5, 10, 12000),
-(6, 1, 16000),
-(6, 10, 11000),
-(7, 3, 24000),
-(7, 5, 18000);
+
+
+
+
+
+
+
+
+
+
+
 
 
